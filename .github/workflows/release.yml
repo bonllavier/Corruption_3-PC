@@ -1,0 +1,56 @@
+# Versioned releases.
+#
+# The executable is built on the maintainer's machine: the build links translated
+# game code derived from the maintainer's own disc, which is never uploaded, so a
+# GitHub runner cannot produce it. recomp/tools/publish_release.ps1 tags vX.Y.Z,
+# pushes, creates the release and uploads the zip. This workflow is the safety net
+# for a tag pushed by hand: it creates a draft release with the CHANGELOG section
+# so the zip can be attached from the web UI, and it checks the documentation.
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    name: Check documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Required files
+        run: |
+          for f in README.md LICENSE THIRD-PARTY-NOTICES.md CHANGELOG.md docs/controls.md docs/troubleshooting.md docs/media/banner.png; do
+            test -f "$f" || { echo "missing $f"; exit 1; }
+          done
+      - name: No game data or player data committed
+        run: |
+          if git ls-files | grep -Ei '\.(iso|rvz|wbfs|gcz|wia|ciso|exe|dll|sav|log)$|^UserData/|^game/'; then
+            echo "forbidden files are tracked"; exit 1
+          fi
+      - name: Tag matches a CHANGELOG section
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: grep -q "^## ${GITHUB_REF_NAME}" CHANGELOG.md || { echo "CHANGELOG.md has no section for ${GITHUB_REF_NAME}"; exit 1; }
+
+  draft-release:
+    name: Draft release for a hand-pushed tag
+    needs: docs
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create the draft when the release does not exist yet
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "release $GITHUB_REF_NAME already exists"; exit 0
+          fi
+          awk -v tag="## $GITHUB_REF_NAME" 'index($0, tag) == 1 {p=1; next} /^## / && p {exit} p' CHANGELOG.md > notes.md
+          printf '\n\n_Attach MetroidPrime3PCPort-%s-win64.zip and its .sha256, built locally with recomp/tools/package_release.ps1, then publish._\n' "$GITHUB_REF_NAME" >> notes.md
+          gh release create "$GITHUB_REF_NAME" --draft --prerelease --title "Metroid Prime 3 PC Port $GITHUB_REF_NAME" --notes-file notes.md

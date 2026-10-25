@@ -1,0 +1,48 @@
+name: Performance problem
+description: Low FPS, stutter or long loading in a specific area
+title: "[Performance] <area>: <short description>"
+labels: ["performance", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Performance issues are reproduced from the **area name** alone, so the most important field is where you were.
+        A screenshot of the **F9** performance panel helps. The first visit to an area compiles shaders: a short hitch there is expected.
+  - type: input
+    id: version
+    attributes:
+      label: Port version
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Where in the game were you?
+      placeholder: G.F.S. Olympus, hangar, during the first firefight
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What did you see?
+      placeholder: FPS dropped to 25 for several seconds each time an enemy spawned.
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: CPU / GPU / RAM
+      description: Or attach an F12 report, whose system.txt has it
+      placeholder: Ryzen 5 5600, RTX 3060, 16 GB
+    validations:
+      required: true
+  - type: input
+    id: settings
+    attributes:
+      label: Video settings
+      placeholder: 1920x1080 borderless, MSAA off, anisotropic 16x, per-pixel lighting on
+  - type: textarea
+    id: report
+    attributes:
+      label: F9 screenshot or F12 report zip (optional)

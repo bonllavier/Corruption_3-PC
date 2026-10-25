@@ -1,0 +1,16 @@
+# Player data and build outputs never belong in the repository.
+UserData/
+game/
+dist/
+*.iso
+*.rvz
+*.wbfs
+*.gcz
+*.wia
+*.ciso
+*.zip
+*.exe
+*.dll
+*.log
+Thumbs.db
+.DS_Store

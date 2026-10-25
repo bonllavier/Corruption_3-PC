@@ -1,0 +1,75 @@
+name: Bug report
+description: Something looks wrong, breaks or crashes
+title: "[Bug] <area>: <short description>"
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing! Press **F12** in game first: it writes `UserData/Reports/report_<date>.zip`
+        (screenshot, log, settings, system summary) and opens the folder. Drag that zip into this form.
+        If the game closed with an error dialog, zip the `UserData/Logs/...` folder the dialog names instead.
+  - type: input
+    id: version
+    attributes:
+      label: Port version
+      description: Shown at the bottom of the F1 panel, or in the zip's system.txt
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Where in the game were you?
+      description: Planet, room or objective name. This is the most useful detail; it lets the problem be reproduced directly.
+      placeholder: Norion, Generator A, right after the first lever
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      placeholder: Magenta triangles appeared on the central structure when I entered the room.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can it be reproduced?
+      placeholder: |
+        1. Load the save in slot 1
+        2. Walk to ...
+        3. Use the lever with E
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does it happen?
+      options:
+        - Every time
+        - Often
+        - Once
+    validations:
+      required: true
+  - type: dropdown
+    id: input
+    attributes:
+      label: Input mode
+      options:
+        - Keyboard and mouse (default)
+        - Real Wii Remote over Bluetooth
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Report zip (F12) or Logs folder
+      description: Drag the zip here. It contains no saves, no game data and no personal files.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I am using my own dump of the USA disc (RM3E01) and the latest release
+          required: true
