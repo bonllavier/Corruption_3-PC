@@ -17,5 +17,7 @@ F1 panel and in the executable's file properties.
   `UserData/Reports`, folder opened automatically.
 - Crash dialog names the run's log folder to attach to a report.
 - Full Wii Remote battery reported to the game (no low-battery warning with the virtual remote).
+- Fixed the "WiiConnect24 cannot be used ... Error Code: 109042" dialog on the Game Select screen (the WiiConnect24
+  scheduler probe now succeeds; the game never connects to anything).
 - Shared shader cache seeded with every pipeline seen so far (first-run stutter reduced).
 - Known: experimental Super-xBR texture upscaling can produce magenta polygons; off by default. Only the USA disc.
