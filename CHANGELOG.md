@@ -7,7 +7,8 @@ F1 panel and in the executable's file properties.
 ## v0.1.0 - 2026-10-25 - first public test build
 
 - Native Windows build of Metroid Prime 3: Corruption (USA, RM3E01) running from the player's own disc image
-  (`.iso`, `.rvz`, `.wbfs`, `.gcz`, `.wia`, `.ciso`) placed in the `game` folder. No extraction step.
+  (`.iso`, `.rvz`, `.wbfs`, `.gcz`, `.wia`, `.ciso`). The first start asks for the file with a dialog and remembers the
+  path; no extraction step. Updates: unzip over the old folder, `UserData` (saves, settings) is never in the zip.
 - Keyboard and mouse mode on by default: virtual Wii Remote + Nunchuk with remappable keys, mouse look in first
   person, gesture keys (push/pull, twist, lasso, spring jump), key caps in the game's own button prompts following the
   Windows display language.

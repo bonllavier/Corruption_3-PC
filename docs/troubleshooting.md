@@ -4,7 +4,7 @@
 
 1. **In game, press F12.** A small status line appears in F1 > Diagnostics while the report is written (one or two seconds).
    The port creates `UserData/Reports/report_<date>.zip` and opens the folder in Explorer with the zip selected.
-2. Open a new issue: [Bug report](../../../issues/new/choose). Drag the zip into the text box.
+2. Open a new post in [Discussions](../../../discussions), category *Bug reports*. Drag the zip into the text box.
 3. Say **where you were**: planet, room or objective name, and what you were doing (fighting, using a lever, opening the map...).
    With the area name the developer can go there directly and reproduce it. A short description of what you saw is enough;
    the screenshot in the zip shows the rest.
@@ -25,7 +25,7 @@ No save games, no game data, no personal files. Open the files before sending if
 ### If the game closes with an error dialog
 
 The dialog names the folder of that run, `UserData/Logs/base_<number>_pid<number>`. Zip that whole folder and attach it
-to the issue (it holds `console.log`, `crash_*.txt` and a memory snapshot that lets the crash be analysed offline).
+to the post (it holds `console.log`, `crash_*.txt` and a memory snapshot that lets the crash be analysed offline).
 Logs older than four days are deleted automatically.
 
 ### Performance problems (stutter, low FPS)
@@ -36,9 +36,9 @@ new shaders: a short hitch there is expected.
 
 ## Common issues
 
-**"No Metroid Prime 3: Corruption disc image was found"**
-Copy your dump into the `game` folder next to the executable, or set `iso_path` under `[paths]` in `UserData/Config.toml`.
-Supported: `.iso`, `.rvz`, `.wbfs`, `.gcz`, `.wia`, `.ciso`.
+**The game asks for the disc image at every start, or says it was not found**
+The chosen path is stored as `iso_path` under `[paths]` in `UserData/Config.toml`. If the file was moved, pick it again
+in the dialog or in **F1 > Diagnostics > Select disc image**. Supported: `.iso`, `.rvz`, `.wbfs`, `.gcz`, `.wia`, `.ciso`.
 
 **"The disc image is not Metroid Prime 3: Corruption (USA)"**
 Only the USA disc, game ID `RM3E01`, revision 0, is supported. PAL and Japanese discs, and the *Metroid Prime Trilogy*
@@ -66,10 +66,15 @@ Everything lives next to the executable (portable layout):
 
 | Folder | Content |
 | --- | --- |
-| `game/` | Your disc image (read only) |
-| `UserData/Config.toml` | Settings and key bindings |
+| `UserData/Config.toml` | Settings, key bindings and the disc image path (created from `Config.default.toml` on first run) |
 | `UserData/NAND/` | Save files (Wii NAND layout) |
 | `UserData/Logs/` | One folder per run with the console log and crash files |
 | `UserData/Reports/` | F12 bug reports |
 | `UserData/Cache/` | Shader and pipeline caches; safe to delete |
 | `UserData/texture_replacements/` | Custom textures (Dolphin naming) and the generated keyboard icons |
+
+## Updating
+
+Unzip a new release over the same folder and overwrite. `UserData` is never inside the zip, so saves (`UserData/NAND`),
+settings, key bindings, the disc image path and your bug reports survive. If a release note says a setting changed its
+meaning, the note tells you what to edit; otherwise nothing is needed.

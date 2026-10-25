@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Bug report (preferred): Discussions > Bug reports
+    url: https://github.com/bonllavier/metroid-prime-3-pc-port/discussions
+    about: Post your F12 report zip and where in the game you were
   - name: Question or idea
     url: https://github.com/bonllavier/metroid-prime-3-pc-port/discussions
     about: Anything that is not a bug or a performance problem

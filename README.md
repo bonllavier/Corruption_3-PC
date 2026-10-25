@@ -5,15 +5,23 @@
 # Metroid Prime 3 PC Port
 
 A native Windows port of **Metroid Prime 3: Corruption** (Wii, USA), created by **bonllavier**.
-The game's code runs recompiled on your PC: no emulator, no virtual machine. You play with keyboard and mouse
+The game's program code runs recompiled on your PC: no emulator, no virtual machine. You play with keyboard and mouse
 (or a real Wii Remote over Bluetooth), at your monitor's resolution, with per-pixel lighting, anisotropic
 filtering and MSAA on top of the original look.
 
-> **Status: experimental alpha.** The game boots, loads saves, and the opening of the campaign (G.F.S. Olympus,
-> Norion) is playable at 60 FPS. Later areas have not been tested end to end. Expect bugs and please report them,
-> that is what this release is for.
+> ## ⚠️ Testing phase: testers wanted
+>
+> **This release is a test build, not a finished port.** The game boots, loads saves and the start of the campaign
+> (G.F.S. Olympus, Norion) plays at 60 FPS; most of the Wii Remote and Nunchuk gestures are already mapped to keys.
+> Everything after that has not been played end to end, so expect missing textures, crashes, soft-locks and untested
+> gestures. I need people to play it and tell me where it breaks.
+>
+> **How to help:** play, and when something goes wrong press **F12** in game. The port writes a small zip with a
+> screenshot, the session log and your settings. Post it in **[Discussions](../../discussions)** (category *Bug reports*)
+> together with **where you were in the game**. That one detail lets me go there and reproduce it. Performance problems
+> only need the area name. Thank you!
 
-**No game data is included.** You need your own dump of the disc. See [Legal](#legal).
+**No game assets are included.** You need your own dump of the disc. See [Legal](#legal).
 
 ---
 
@@ -30,11 +38,18 @@ filtering and MSAA on top of the original look.
 ## Getting started
 
 1. Download the latest `MetroidPrime3PCPort-vX.Y.Z-win64.zip` from the [Releases](../../releases) page and unzip it anywhere.
-2. Copy your disc image into the **`game`** folder (the first image found there is used).
-3. Run **`MetroidPrime3PCPort.exe`**. The first start compiles shaders for a few seconds.
-4. Pick your save slot with the mouse and click. **F1** opens the options at any time.
+2. Run **`MetroidPrime3PCPort.exe`**. On the first start it asks for your disc image: pick the file in the dialog.
+   The path is saved in `UserData/Config.toml`, so you are asked only once (change it later in **F1 > Diagnostics > Select disc image**).
+3. The first start compiles shaders for a few seconds. Pick your save slot with the mouse and click. **F1** opens the options at any time.
 
-Everything the port writes (settings, saves, logs, caches, bug reports) stays inside its own `UserData` folder. The disc image is only ever read.
+Everything the port writes (settings, saves, logs, caches, bug reports) stays inside its own `UserData` folder next to the
+executable. The disc image is only ever read, wherever it lives.
+
+## Updating to a new version
+
+Unzip the new release **over the same folder** and overwrite when asked. The zip never contains `UserData`, so your
+saves, settings, key bindings and the remembered disc image path are kept. Nothing else is needed; the shader cache
+is upgraded automatically on the next start.
 
 ## Controls
 
@@ -71,15 +86,14 @@ Full table and gesture notes: [docs/controls.md](docs/controls.md).
 | F6 | Virtual Wii Remote motion panel |
 | Esc (menu closed) | Exit prompt |
 
-## Reporting bugs and helping with testing
+## Reporting bugs
 
 Press **F12** when something looks wrong. The port writes `UserData/Reports/report_<date>.zip` with a screenshot, the
-console log of that session, your settings and a system summary, then opens the folder for you. Attach that zip to a
-new [issue](../../issues/new/choose) and tell us **where in the game you were** (planet, room, what you were doing).
-The area is the key detail: with it the problem can be reproduced directly.
+console log of that session, your settings and a system summary, then opens the folder for you. Post the zip in
+[Discussions](../../discussions) (*Bug reports*) and say **where in the game you were** (planet, room, what you were doing).
 
 If the game closes with an error dialog, the dialog names the `UserData/Logs/...` folder of that run. Zip that folder and attach it.
-Nothing personal is collected: you can open every file in the zip before sending it. See [docs/troubleshooting.md](docs/troubleshooting.md).
+Nothing personal is collected: you can open every file in the zip before posting it. See [docs/troubleshooting.md](docs/troubleshooting.md).
 
 ## Options worth knowing (F1)
 
@@ -97,8 +111,14 @@ Nothing personal is collected: you can open every file in the zip before sending
 
 ## Legal
 
-This project contains **no game code, assets or data**. The port runs from the player's own disc image, which is only read.
-*Metroid* and *Metroid Prime* are trademarks of Nintendo. This is a fan project with no affiliation to Nintendo or Retro Studios.
+This is a non-commercial fan project with no affiliation to Nintendo or Retro Studios. *Metroid* and *Metroid Prime*
+are trademarks of Nintendo.
+
+- The release contains **no game assets**: no textures, models, audio, videos, text or levels. All of that is read at
+  run time from the disc image you dump from your own copy of the game, which is never modified.
+- The executable contains the game's **program logic translated to native code** (static recompilation), the way other
+  recompilation projects work. It is unusable without the original disc. If you do not own the game, do not download this.
+- Do not ask for, offer or link disc images anywhere in this project. Such posts are removed.
 
 The port is built on [WiiCompiled](https://github.com/WiiCompiled) and its Aurora renderer and is licensed under the
 [GNU GPL v3](LICENSE). Third-party components and their licenses are listed in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
