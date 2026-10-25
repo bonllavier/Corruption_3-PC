@@ -63,12 +63,12 @@ The port drives a virtual Wii Remote and Nunchuk. Every key can be remapped in *
 | W A S D | Nunchuk stick |
 | Shift | Z (lock on) |
 | Ctrl | C (Morph Ball) |
-| Arrow keys | D-pad |
-| Esc | + (pause / menu) |
-| `-` | - (visor select) |
-| 1, 2, H | 1, 2, HOME |
+| Arrow keys (middle click = down) | D-pad |
+| 1 | + (pause / menu) |
+| 2 | - (visor select) |
+| Numpad 1, Numpad 2, H | 1, 2, HOME |
 | E / Q (hold, release) | Push the remote forward / pull it back (levers, ship controls) |
-| Z / X | Twist the remote left / right |
+| Z / X (or Numpad 7 / 8) | Twist the remote left / right |
 | R / F | Flick the Nunchuk: grapple lasso throw / pull |
 | T | Flick the remote up (Morph Ball spring jump) |
 | G (hold), U/J, N/M, I/K | Shake both, tilt remote, twist Nunchuk, tilt Nunchuk |
@@ -84,7 +84,7 @@ Full table and gesture notes: [docs/controls.md](docs/controls.md).
 | F12 | **Create a bug report** (screenshot + log + settings, zipped) |
 | F9 | Performance panel |
 | F6 | Virtual Wii Remote motion panel |
-| Esc (menu closed) | Exit prompt |
+| Esc | Exit prompt |
 
 ## Reporting bugs
 
@@ -102,9 +102,31 @@ Nothing personal is collected: you can open every file in the zip before posting
 - **Audio**: volume, stereo / Pro Logic II / mono, high-quality resampler.
 - **Performance**: GPU thread, disc reads on their own thread, texture decoding on several cores, shader waiting policy. The game logic always runs at 60 Hz, like the console.
 
+## Please read: shaders, stutter and the cache
+
+The Wii draws with a fixed-function GPU whose state (texture stages, blending, lighting, fog...) the game changes
+thousands of times per frame. On a PC each distinct combination has to become a real shader program, compiled by your
+graphics driver for *your* GPU. The port cannot know every combination in advance, so:
+
+- **The first time a material appears on your PC, its shader is compiled.** That is the hitch you feel when you enter
+  a new room, meet a new enemy or fire a new weapon for the first time. The port ships a seed of every combination seen
+  so far (thousands of them) and compiles it in the background at startup, which is why the first launch takes a few
+  seconds longer; areas nobody has played yet still compile on sight.
+- **Compiled shaders are kept in `UserData/Cache`.** The next visit to the same place, and the next launch, do not
+  compile again: once the cache has filled for an area, the stutter there is gone. Do not delete that folder unless
+  troubleshooting.
+- **What to report:** a hitch the *first* time you see something is expected and not worth a report. A stutter that
+  keeps happening in the same place on later visits, or constantly low FPS, is a real problem: post it with the area
+  name and, ideally, an F9 performance panel screenshot.
+- **How you can make it better for everyone:** after playing new areas, your `UserData/Cache/pipeline_cache.db`
+  contains the recipes (not shaders, not game data, a few MB) of everything you rendered. Attaching it to a Discussions
+  post lets the next release ship them pre-seeded, so other players never compile them.
+- The option *F1 > Performance > "Experimental: do not wait for new shaders"* (on by default) keeps the frame rate
+  up during compilation by skipping a draw for a fraction of a second instead of freezing the whole game; if you see a
+  piece of a room pop in late, that is this option doing its job.
+
 ## Known issues
 
-- First launch and the first visit to a new area compile shaders; a short stutter is normal until the cache fills.
 - Experimental texture upscaling (Super-xBR) can paint some polygons magenta; it is off by default.
 - Bluetooth Wii Remote support exists but has had far less testing than keyboard and mouse.
 - Only the USA disc (RM3E01, revision 0) is supported.

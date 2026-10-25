@@ -18,10 +18,10 @@ your current primary binding. Key names come from Windows, so they follow your k
 | W / A / S / D | Nunchuk stick | Move |
 | Left or right Shift | Z | Lock on |
 | Left or right Ctrl | C | Morph Ball |
-| Arrow keys | D-pad | Visors, seeker missiles |
-| Esc | + | Pause / menu (Esc also opens the exit prompt when no menu is open) |
-| `-` | - | Visor select |
-| 1 / 2 | 1 / 2 | |
+| Arrow keys; middle click = down | D-pad | Visors, seeker missiles |
+| 1 | + | Pause / menu (Esc opens the port's exit prompt) |
+| 2 | - | Visor select |
+| Numpad 1 / Numpad 2 | 1 / 2 | |
 | H | HOME | |
 
 ## Gestures
@@ -31,7 +31,7 @@ The game only recognises a handful of motion signals. Each one has a key:
 | Signal the game detects | Used for | Key |
 | --- | --- | --- |
 | Push the remote forward / pull it back | Levers, ship controls, pulling objects | **E** / **Q** (hold briefly, then release; do not press both) |
-| Twist the remote left / right | Valves and rotating mechanisms | **Z** / **X** |
+| Twist the remote left / right | Valves and rotating mechanisms | **Z** / **X** (also Numpad 7 / 8) |
 | Flick the Nunchuk | Grapple Lasso: throw / pull | **R** / **F** |
 | Flick the remote up | Morph Ball spring jump | **T** |
 | Shake both controllers | "Shake" prompts | **G** (hold) |
