@@ -1,7 +1,7 @@
 # Changelog
 
 Versions follow `MAJOR.MINOR.PATCH`. Each release on GitHub is tagged `vMAJOR.MINOR.PATCH` and ships
-`MetroidPrime3PCPort-vMAJOR.MINOR.PATCH-win64.zip` with its SHA-256. The version is also shown at the bottom of the
+`Corruption_3-PC-vMAJOR.MINOR.PATCH-win64.zip` with its SHA-256. The version is also shown at the bottom of the
 F1 panel and in the executable's file properties.
 
 ## v0.1.0 - 2026-10-25 - first public test build

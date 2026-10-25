@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/media/banner.png" alt="Metroid Prime 3 PC Port" width="100%">
+  <img src="docs/media/banner.png" alt="Corruption_3 PC" width="100%">
 </p>
 
-# Metroid Prime 3 PC Port
+# Corruption_3 PC
 
 A native Windows port of **Metroid Prime 3: Corruption** (Wii, USA), created by **bonllavier**.
 The game's program code runs recompiled on your PC: no emulator, no virtual machine. You play with keyboard and mouse
@@ -37,8 +37,8 @@ filtering and MSAA on top of the original look.
 
 ## Getting started
 
-1. Download the latest `MetroidPrime3PCPort-vX.Y.Z-win64.zip` from the [Releases](../../releases) page and unzip it anywhere.
-2. Run **`MetroidPrime3PCPort.exe`**. On the first start it asks for your disc image: pick the file in the dialog.
+1. Download the latest `Corruption_3-PC-vX.Y.Z-win64.zip` from the [Releases](../../releases) page and unzip it anywhere.
+2. Run **`Corruption_3 PC.exe`**. On the first start it asks for your disc image: pick the file in the dialog.
    The path is saved in `UserData/Config.toml`, so you are asked only once (change it later in **F1 > Diagnostics > Select disc image**).
 3. The first start compiles shaders for a few seconds. Pick your save slot with the mouse and click. **F1** opens the options at any time.
 

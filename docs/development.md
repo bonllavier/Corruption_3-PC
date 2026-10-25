@@ -6,10 +6,10 @@ Releases are versioned `vMAJOR.MINOR.PATCH`. The version lives in one place in t
 (`prime_port_version.h`) and flows into the executable's file properties, the F1 panel footer, the zip name,
 the git tag and the GitHub Release. Each release ships:
 
-- `MetroidPrime3PCPort-vX.Y.Z-win64.zip`: executable, runtime DLLs, bundled Wii bootstrap/DSP data, shader seed,
+- `Corruption_3-PC-vX.Y.Z-win64.zip`: executable, runtime DLLs, bundled Wii bootstrap/DSP data, shader seed,
   `Config.default.toml` (copied to `UserData/Config.toml` on first run; the zip never contains `UserData`, so players
   update by unzipping over the old folder), this documentation.
-- `MetroidPrime3PCPort-vX.Y.Z-win64.zip.sha256`: checksum to verify the download.
+- `Corruption_3-PC-vX.Y.Z-win64.zip.sha256`: checksum to verify the download.
 
 The maintainer runs one script that packages the zip, commits this repository, tags it, pushes, creates the
 GitHub Release with the matching `CHANGELOG.md` section and uploads both files. A tag pushed by hand gets a draft

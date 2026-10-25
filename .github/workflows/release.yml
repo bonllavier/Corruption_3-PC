@@ -52,5 +52,5 @@ jobs:
             echo "release $GITHUB_REF_NAME already exists"; exit 0
           fi
           awk -v tag="## $GITHUB_REF_NAME" 'index($0, tag) == 1 {p=1; next} /^## / && p {exit} p' CHANGELOG.md > notes.md
-          printf '\n\n_Attach MetroidPrime3PCPort-%s-win64.zip and its .sha256, built locally with recomp/tools/package_release.ps1, then publish._\n' "$GITHUB_REF_NAME" >> notes.md
-          gh release create "$GITHUB_REF_NAME" --draft --prerelease --title "Metroid Prime 3 PC Port $GITHUB_REF_NAME" --notes-file notes.md
+          printf '\n\n_Attach Corruption_3-PC-%s-win64.zip and its .sha256, built locally with recomp/tools/package_release.ps1, then publish._\n' "$GITHUB_REF_NAME" >> notes.md
+          gh release create "$GITHUB_REF_NAME" --draft --prerelease --title "Corruption_3 PC $GITHUB_REF_NAME" --notes-file notes.md

@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-Metroid Prime 3 PC Port (created by bonllavier) is licensed under the GNU General Public License v3.0
+Corruption_3 PC (created by bonllavier) is licensed under the GNU General Public License v3.0
 (see [LICENSE](LICENSE)). It is a modified build of WiiCompiled and inherits every notice below.
 The port adds an independent implementation of the Super-xBR upscaling method (Hyllian, MIT),
 credited in the WiiCompiled notices section that follows.
