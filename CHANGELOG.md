@@ -4,6 +4,17 @@ Versions follow `MAJOR.MINOR.PATCH`. Each release on GitHub is tagged `vMAJOR.MI
 `Corruption_3-PC-vMAJOR.MINOR.PATCH-win64.zip` with its SHA-256. The version is also shown at the bottom of the
 F1 panel and in the executable's file properties.
 
+## v0.1.1 - 2026-10-25 - video memory fix
+
+- Fixed a crash after long sessions ("Aurora reported a fatal renderer error ... ID3D12Device::CreateHeap ...
+  Copy Conv Texture"): the renderer kept every EFB copy texture for every destination the game ever wrote until the
+  game rewrote that memory, so video memory filled up after about 40 minutes of play. Copy textures now live under a
+  512 MiB budget (`WII_COMPILED_AURORA_COPY_BUDGET_MB` to change it); the destinations idle for longest are released
+  first and nothing used in the last five seconds is touched.
+- Mouse look now stops while Samus uses her arm on in-world controls (keypads, levers) and inside the gunship, and
+  resumes afterwards; it follows the game's own command table and control hints.
+- More Wii button textures replaced by key caps (HUD "Press A" prompts, options pictures, control stick diagonals).
+
 ## v0.1.0 - 2026-10-25 - first public test build
 
 - Native Windows build of Metroid Prime 3: Corruption (USA, RM3E01) running from the player's own disc image
