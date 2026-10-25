@@ -3,7 +3,8 @@
 ## How to report a problem
 
 1. **In game, press F12.** A small status line appears in F1 > Diagnostics while the report is written (one or two seconds).
-   The port creates `UserData/Reports/report_<date>.zip` and opens the folder in Explorer with the zip selected.
+   The port creates `UserData/Reports/report_<date>_v<version>.zip` and opens the folder in Explorer with the zip selected.
+   The version in the name tells the developer exactly which build you ran; check **F1 > Info** for a newer one first.
 2. Open a new post in [Discussions](../../../discussions), category *Bug reports*. Drag the zip into the text box.
 3. Say **where you were**: planet, room or objective name, and what you were doing (fighting, using a lever, opening the map...).
    With the area name the developer can go there directly and reproduce it. A short description of what you saw is enough;
@@ -17,7 +18,7 @@ What the zip contains, and nothing else:
 | `console.log` | The port's log for that session (loading, shaders, warnings) |
 | `crash_*.txt` | Only if the game crashed earlier in that session: registers and stack |
 | `Config.toml` | Your settings and key bindings |
-| `system.txt` | Windows build, CPU, RAM, GPU, display, port version |
+| `system.txt` | Port version and build, Windows build, CPU, RAM, GPU, display, settings in use |
 | `HOW_TO_REPORT.txt` | These instructions |
 
 No save games, no game data, no personal files. Open the files before sending if you want to check.

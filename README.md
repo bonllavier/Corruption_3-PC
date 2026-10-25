@@ -81,10 +81,18 @@ Full table and gesture notes: [docs/controls.md](docs/controls.md).
 | --- | --- |
 | F1 | Port options: video, controls, audio, performance, diagnostics |
 | F10 | Renderer bar (resolution, display mode, Wii Remote pairing, audio) |
-| F12 | **Create a bug report** (screenshot + log + settings, zipped) |
+| F12 | **Create a bug report** (screenshot + log + settings, zipped; the file name carries the version) |
 | F9 | Performance panel |
 | F6 | Virtual Wii Remote motion panel |
 | Esc | Exit prompt |
+
+## Version and updates
+
+**F1 > Info** shows the exact build you are running (version, build date), the paths in use and whether a newer
+release exists: at startup the port sends one request to `api.github.com` for the latest release and shows a green
+notice for a few seconds when there is a newer one (turn it off in that tab or with `check_updates = false`).
+`Check for updates.ps1` in the game folder does the same from PowerShell. Every F12 report also records the version
+in its file name (`report_<date>_v0.1.0.zip`) and in `system.txt`, so please always report with the latest build.
 
 ## Reporting bugs
 

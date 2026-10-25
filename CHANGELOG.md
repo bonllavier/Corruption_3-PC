@@ -17,6 +17,8 @@ F1 panel and in the executable's file properties.
 - In-game bug reports (F12 or F1 > Diagnostics): screenshot, session log, settings and system summary zipped under
   `UserData/Reports`, folder opened automatically.
 - Crash dialog names the run's log folder to attach to a report.
+- F1 > Info tab: version, build date, author, paths, and a check against GitHub Releases for newer builds (on-screen
+  notice; `Check for updates.ps1` in the folder does the same). Report zips carry the version in their name.
 - Full Wii Remote battery reported to the game (no low-battery warning with the virtual remote).
 - Fixed the "WiiConnect24 cannot be used ... Error Code: 109042" dialog on the Game Select screen (the WiiConnect24
   scheduler probe now succeeds; the game never connects to anything).
