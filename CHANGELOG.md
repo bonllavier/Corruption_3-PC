@@ -4,6 +4,20 @@ Versions follow `MAJOR.MINOR.PATCH`. Each release on GitHub is tagged `vMAJOR.MI
 `Corruption_3-PC-vMAJOR.MINOR.PATCH-win64.zip` with its SHA-256. The version is also shown at the bottom of the
 F1 panel and in the executable's file properties.
 
+## v0.1.2 - 2026-10-25 - scanner fix and mouse look toggle
+
+- Fixed the scan visor no longer scanning anything after a long session (outlines still visible) until the game was
+  restarted: the renderer ran out of slots for the small screen readbacks the scanner uses and now recycles them.
+- Fixed a crash "invalid tex offset 6" in late-game effects.
+- Mouse look on/off key (L by default, remappable in F1 > Controls) with a small HUD-style panel at the top of the
+  screen while aiming in first person, in English or Spanish following Windows. Its size and position can be adjusted
+  in F1 > Controls.
+- Update check fixed: it reported "HTTP 404" because GitHub's "latest release" address leaves out pre-releases
+  (every 0.x build); it now reads the public release list (no account or token involved). v0.1.1 and older still show
+  the 404, so players on those versions have to download this one by hand once.
+- Bug reports (F12) now also include your Metroid Prime 3 save (`save/save.bin`, `save/banner.bin`) so the reported
+  spot can be loaded directly.
+
 ## v0.1.1 - 2026-10-25 - video memory fix
 
 - Fixed a crash after long sessions ("Aurora reported a fatal renderer error ... ID3D12Device::CreateHeap ...

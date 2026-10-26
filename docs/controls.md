@@ -49,6 +49,11 @@ Enabled by default (F1 > Controls > *Camera follows the mouse in first person*).
 a lock-on, moving the mouse turns and pitches the camera like a PC shooter and the game's pointer stays centred.
 In menus, the map, Morph Ball, cutscenes and while Samus is at the ship's controls the pointer is absolute again.
 
+Press **L** (action *Mouse look on/off*, remappable) to switch it off and on at any time, for example when the
+game's own edge-turning pointer suits a fight better. While aiming in first person a small panel at the top of the
+screen shows whether it is on and which key toggles it; its size and position are adjusted in F1 > Controls.
+Keypads, levers and the ship's controls turn mouse look off by themselves while Samus uses her arm.
+
 Settings in the same tab: sensitivity (degrees per pixel, 0.20 by default), vertical inversion and smoothing
 (0 = none by default). The maximum turn rate is still the game's own: raise it in the game menu > Options > Controls >
 Sensitivity (Advanced has the smallest dead zone and the fastest turn).
