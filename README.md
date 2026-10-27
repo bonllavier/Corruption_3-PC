@@ -105,10 +105,10 @@ Nothing personal is collected: you can open every file in the zip before posting
 
 ## Options worth knowing (F1)
 
-- **Video**: internal resolution (monitor native by default), MSAA 2x/4x/8x, anisotropic filtering, per-pixel lighting, console copy filter (the Wii's vertical blur, off by default), frame interpolation to 120/180 Hz (off by default).
+- **Video**: internal resolution (monitor native by default), MSAA 2x/4x/8x, anisotropic filtering, per-pixel lighting, enhanced metal (modern metal material on the suit, armour and machinery; on by default), console copy filter (the Wii's vertical blur, off by default), frame interpolation to 120/180 Hz (off by default).
 - **Controls**: key bindings, mouse look sensitivity and smoothing, keyboard icons in game prompts, hide cursor, always-full Wii Remote battery.
 - **Audio**: volume, stereo / Pro Logic II / mono, high-quality resampler.
-- **Performance**: GPU thread, disc reads on their own thread, texture decoding on several cores, shader waiting policy. The game logic always runs at 60 Hz, like the console.
+- **Performance**: GPU thread, disc reads on their own thread, texture decoding on several cores, shader waiting policy, and the experimental *ubershader* (see below). The game logic always runs at 60 Hz, like the console.
 
 ## Please read: shaders, stutter and the cache
 
@@ -132,6 +132,29 @@ graphics driver for *your* GPU. The port cannot know every combination in advanc
 - The option *F1 > Performance > "Experimental: do not wait for new shaders"* (on by default) keeps the frame rate
   up during compilation by skipping a draw for a fraction of a second instead of freezing the whole game; if you see a
   piece of a room pop in late, that is this option doing its job.
+- *F1 > Performance > "Ubershader while shaders compile"* (on by default) goes one step further: while
+  a material's shader compiles, it is drawn with a generic shader that reads the material from memory, so nothing is
+  skipped and nothing waits. Compiled shaders and the cache always have priority; the ubershader only covers the gap.
+  It adds about 100 MB to the shader cache and a couple of seconds to start-up, and costs some GPU time during those
+  few frames. Every release is scanned with VirusTotal and the report is linked in its notes.
+
+## Image effects (F1 > Effects)
+
+Two ways to tune the look:
+
+- **Aurora effects** (built in, apply instantly, cost little): ambient occlusion from the depth buffer (**on by
+  default**: soft contact shading in corners and where objects meet, applied to the 3D world only, never to the visor
+  or HUD; needs MSAA off; *Reset SSAO* restores the tuned defaults), extra bloom/glow, CAS sharpening, FXAA, and colour
+  grading (brightness, contrast, saturation, gamma, temperature, vignette), which are off by default. The game's own
+  bloom and lighting are untouched.
+- **ReShade** (bundled in the `reshade` folder, BSD licence): tick *Load ReShade at startup* in F1 > Effects and restart.
+  In game, **Home** opens the ReShade menu with every effect and parameter, **End** toggles all effects, **Print Screen**
+  saves a screenshot. ReShade effects pause automatically in menus, the map, videos and while a port panel (F1, F10,
+  F9, F6) is open, so they never touch those screens. A starter preset enables CAS and SMAA; the bundled set also has FXAA, LumaSharpen, MagicBloom,
+  AmbientLight, Vibrance, Tonemap, Curves, Levels, LiftGammaGain, Vignette and LUT. Direct3D 12 only.
+
+Effects are post-processing: they cannot add texture detail, and heavy ReShade shaders cost frame time. If you report a
+visual glitch, say whether any effect or ReShade was active (the F12 report records your settings).
 
 ## Known issues
 

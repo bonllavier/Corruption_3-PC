@@ -219,3 +219,31 @@ Not code, but the documentation this project depends on:
 ---
 
 If you believe a component is missing or misattributed here, please open an issue.
+
+---
+
+## Bundled ReShade (optional, `reshade/` folder; loaded only when enabled in F1 > Effects)
+
+- **ReShade 6.8.0** (`reshade/ReShade64.dll`) - BSD 3-Clause, Copyright 2014 Patrick Mours. Unmodified binary from
+  <https://reshade.me>, redistributed under the terms in `reshade/LICENSE_ReShade.md`. ReShade is a generic
+  post-processing injector; it contains no game code or data.
+- **ReShade add-on API headers** (`recomp/third_party/reshade/include/*.hpp`, build-time only) - BSD 3-Clause, Copyright 2014
+  Patrick Mours.
+- **SweetFX effects** (`reshade/reshade-shaders/Shaders/SweetFX/*.fx`: CAS, SMAA, FXAA, LumaSharpen, Vibrance,
+  Tonemap, Curves, Levels, LiftGammaGain, Vignette, DPX, Technicolor2, FilmGrain, Sepia, Monochrome, Border,
+  ChromaticAberration, Nostalgia, Splitscreen) - MIT, Copyright (c) 2014 CeeJayDK (`reshade/reshade-shaders/LICENSE_SweetFX.txt`).
+  SMAA carries its own MIT-style notice (Jorge Jimenez et al.); FXAA 3.11 is Copyright NVIDIA Corporation, used under its
+  permissive source license.
+- **reshade-shaders** (`ReShade.fxh`, `ReShadeUI.fxh`, `DisplayDepth.fx`, `DisplayDepth_L10N.fxh`, `DrawText.fxh`,
+  `Macros.fxh`, `Blending.fxh`, `TriDither.fxh`, `Daltonize.fx`, `UIMask.fx`, `FilmicPass.fx`, `HighPassSharpen.fx`,
+  `Textures/AreaTex.png`, `SearchTex.png`, `Dirt*.png`, `Lens*.png`, `MagicBloom_Dirt.png`) - BSD 3-Clause, Copyright 2014
+  Patrick Mours and contributors (`UIMask.fx` MIT, Lucas Melo); SMAA lookup textures from SMAA (MIT, Jorge Jimenez et al.).
+- **MagicBloom.fx** - MIT, Copyright (c) 2017 luluco250.
+- **AdaptiveSharpen.fx**, **Colourfulness.fx** - BSD 2-Clause, Copyright (c) 2015-2018 bacondither.
+- **AmbientLight.fx** - Copyright (C) 2015 Ganossa; redistributed with its permission notice as required.
+- **Deband.fx** - Copyright (c) 2015 Niklas Haas, LGPL-2.1-or-later (from mpv).
+- **LUT.fx** and `Textures/lut.png` - Copyright 2008-2016 Marty McFly, redistributable with credit for non-commercial use.
+
+The Aurora image effects (F1 > Effects: CAS sharpening, FXAA, bloom, depth-based ambient occlusion, colour grading)
+are independent implementations in `aurora-main/lib/gfx/post_process.cpp`: CAS follows AMD FidelityFX CAS (MIT,
+Copyright (c) 2017-2019 Advanced Micro Devices, Inc.); FXAA follows FXAA 3.11 by Timothy Lottes (NVIDIA).
