@@ -82,6 +82,7 @@ Full table and gesture notes: [docs/controls.md](docs/controls.md).
 | F1 | Port options: video, controls, audio, performance, diagnostics |
 | F10 | Renderer bar (resolution, display mode, Wii Remote pairing, audio) |
 | F12 | **Create a bug report** (screenshot + log + settings, zipped; the file name carries the version) |
+| F11 | **Screenshot**: the game picture with the image effects, without the port's menus, saved as JPEG in `UserData/Screenshots` (`Corruption3PC_v<version>_<build>_<date>_<time>.jpg`) |
 | F9 | Performance panel |
 | F6 | Virtual Wii Remote motion panel |
 | Esc | Exit prompt |

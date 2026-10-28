@@ -4,31 +4,56 @@ Versions follow `MAJOR.MINOR.PATCH`. Each release on GitHub is tagged `vMAJOR.MI
 `Corruption_3-PC-vMAJOR.MINOR.PATCH-win64.zip` with its SHA-256. The version is also shown at the bottom of the
 F1 panel and in the executable's file properties.
 
-## v0.1.4 - 2026-10-27 - Samus' face and skin, enhanced materials for starships
+## v0.1.5 - 2026-10-28 - Samus' face and skin, enhanced materials, F11 screenshots
+
+This version also contains everything from 0.1.4, which was withdrawn.
+
+### Screenshots
+- **New: F11 takes a screenshot** of the game picture as you see it, with the image effects applied and without the
+  port's menus or notices. It is saved as JPEG (quality 92) in `UserData/Screenshots`, named
+  `Corruption3PC_v<version>_<build>_<date>_<time>.jpg`; `<build>` is a short identifier of the executable, so
+  pictures from different builds of the same version can be told apart. A short notice confirms where it was saved.
 
 ### Ambient occlusion (SSAO)
 - **Samus' face behind the visor no longer gets ambient occlusion**, while the helmet and suit around it keep theirs.
   The port recognises the face by its textures and builds a per-pixel mask of where it stays visible each frame, so
   the helmet frame and anything in front of the face are still shaded. No new game shaders, no shader recompilation.
+- What is seen through the visor glass (the inner rim of the helmet) no longer gets ambient occlusion either.
 - The same applies to **Samus out of the suit** (face, skin, eyes, hair, eyelashes and the Zero Suit) in cutscenes.
 - New option F1 > Effects > *"No SSAO on Samus' face"* (on by default) to compare.
 
 ### Enhanced metal
 - **Skin no longer looks metallic.** The game gives skin the same reflection setup as metal, so the enhanced metal
-  material also made Samus' face and hands shine like metal out of the suit. Skin and eyes are now excluded; the suit,
-  helmet and machinery keep the effect.
+  material also made faces and hands shine like metal. Samus' skin and eyes, Commander Dane's skin and Gandrayda's eye
+  are now excluded; suits, armour and machinery keep the effect.
 
 ### Enhanced materials (F1 > Video, needs per-pixel lighting)
-- **New, on by default.** Surfaces the port identifies by their textures get the same modern material as enhanced
-  metal even when the game gives them no reflection: relief taken from the original textures (plates and seams catch
+- **New, on by default.** Surfaces the port identifies by their textures get a modern material matched to what they
+  are, even when the game gives them no reflection: relief taken from the original textures (plates and seams catch
   the light), sharp highlights from the scene's own lights and a reflection of the surroundings. Only the original
   textures are used; nothing is upscaled or replaced.
-- First set: the **Federation fleet and the G.F.S. Olympus** hulls in the opening space scene (25 textures, brushed
-  metal) and **Samus' gunship paint** (glossy paint, less metallic). Cockpit glass, holographic panels and light strips
-  are left as they were.
-- The first time each ship appears its shader variant is compiled; during that moment it is drawn with the normal
-  lighting. The shader cache keeps it for the next sessions.
+- **Starships:** the Federation fleet and the G.F.S. Olympus hulls in the opening space scene (brushed metal) and
+  Samus' gunship paint (glossy paint, less metallic). Cockpit glass, holographic panels and light strips are left as
+  they were.
+- **Bounty hunters:** Ghor's exoskeleton as brushed machine metal, Rundas' armour as polished crystal and Gandrayda's
+  skin with a soft sheen instead of the suit metal.
+- The first time each of these surfaces appears its shader variant is compiled; during that moment it is drawn with
+  the normal lighting. The shader cache keeps it for the next sessions.
 - *"Enhanced materials"* can be switched off at any time to compare.
+
+### Security and antivirus
+- The public executable no longer contains the developer profiling tools (the F8 stack profiler and the per-thread
+  CPU list of F9), which inspected the game's own threads in a way antivirus heuristics dislike. It ships without
+  debug information (smaller file) and with a standard Windows application manifest (runs as the current user, never
+  asks for administrator rights). Bug reports (F12) are unchanged.
+- **About the VirusTotal result.** The zip is reported clean by every engine. The executable is clean for all engines
+  except one, Trapmine, which marks it `suspicious.low.ml.score` (previous versions got `malicious.moderate.ml.score`).
+  That is not a signature of any known malware: it is a machine-learning score computed from the general shape of the
+  file. This executable is unusual for that kind of model: about 156 MB of automatically generated code (the game's
+  translated program), no digital signature, a new file nobody has seen before, and a few standard Windows calls that
+  come with the Rust library used to read the disc image. These changes lowered the score by one level; removing it
+  completely needs the file to be digitally signed or reviewed by the vendor as a false positive. The executable never
+  asks for administrator rights, does not install anything and only writes to its own data folder (settings, saves, caches, logs, screenshots).
 
 ## v0.1.3 - 2026-10-27 - image effects, enhanced metal and ubershader
 
