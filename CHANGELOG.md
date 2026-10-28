@@ -4,6 +4,32 @@ Versions follow `MAJOR.MINOR.PATCH`. Each release on GitHub is tagged `vMAJOR.MI
 `Corruption_3-PC-vMAJOR.MINOR.PATCH-win64.zip` with its SHA-256. The version is also shown at the bottom of the
 F1 panel and in the executable's file properties.
 
+## v0.1.4 - 2026-10-27 - Samus' face and skin, enhanced materials for starships
+
+### Ambient occlusion (SSAO)
+- **Samus' face behind the visor no longer gets ambient occlusion**, while the helmet and suit around it keep theirs.
+  The port recognises the face by its textures and builds a per-pixel mask of where it stays visible each frame, so
+  the helmet frame and anything in front of the face are still shaded. No new game shaders, no shader recompilation.
+- The same applies to **Samus out of the suit** (face, skin, eyes, hair, eyelashes and the Zero Suit) in cutscenes.
+- New option F1 > Effects > *"No SSAO on Samus' face"* (on by default) to compare.
+
+### Enhanced metal
+- **Skin no longer looks metallic.** The game gives skin the same reflection setup as metal, so the enhanced metal
+  material also made Samus' face and hands shine like metal out of the suit. Skin and eyes are now excluded; the suit,
+  helmet and machinery keep the effect.
+
+### Enhanced materials (F1 > Video, needs per-pixel lighting)
+- **New, on by default.** Surfaces the port identifies by their textures get the same modern material as enhanced
+  metal even when the game gives them no reflection: relief taken from the original textures (plates and seams catch
+  the light), sharp highlights from the scene's own lights and a reflection of the surroundings. Only the original
+  textures are used; nothing is upscaled or replaced.
+- First set: the **Federation fleet and the G.F.S. Olympus** hulls in the opening space scene (25 textures, brushed
+  metal) and **Samus' gunship paint** (glossy paint, less metallic). Cockpit glass, holographic panels and light strips
+  are left as they were.
+- The first time each ship appears its shader variant is compiled; during that moment it is drawn with the normal
+  lighting. The shader cache keeps it for the next sessions.
+- *"Enhanced materials"* can be switched off at any time to compare.
+
 ## v0.1.3 - 2026-10-27 - image effects, enhanced metal and ubershader
 
 ### Image effects (F1 > Effects)

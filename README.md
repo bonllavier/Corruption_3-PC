@@ -105,7 +105,7 @@ Nothing personal is collected: you can open every file in the zip before posting
 
 ## Options worth knowing (F1)
 
-- **Video**: internal resolution (monitor native by default), MSAA 2x/4x/8x, anisotropic filtering, per-pixel lighting, enhanced metal (modern metal material on the suit, armour and machinery; on by default), console copy filter (the Wii's vertical blur, off by default), frame interpolation to 120/180 Hz (off by default).
+- **Video**: internal resolution (monitor native by default), MSAA 2x/4x/8x, anisotropic filtering, per-pixel lighting, enhanced metal (modern metal material on the suit, armour and machinery; skin is left alone; on by default), enhanced materials (the same treatment for identified surfaces such as the starship hulls; on by default), console copy filter (the Wii's vertical blur, off by default), frame interpolation to 120/180 Hz (off by default).
 - **Controls**: key bindings, mouse look sensitivity and smoothing, keyboard icons in game prompts, hide cursor, always-full Wii Remote battery.
 - **Audio**: volume, stereo / Pro Logic II / mono, high-quality resampler.
 - **Performance**: GPU thread, disc reads on their own thread, texture decoding on several cores, shader waiting policy, and the experimental *ubershader* (see below). The game logic always runs at 60 Hz, like the console.
@@ -144,7 +144,7 @@ Two ways to tune the look:
 
 - **Aurora effects** (built in, apply instantly, cost little): ambient occlusion from the depth buffer (**on by
   default**: soft contact shading in corners and where objects meet, applied to the 3D world only, never to the visor
-  or HUD; needs MSAA off; *Reset SSAO* restores the tuned defaults), extra bloom/glow, CAS sharpening, FXAA, and colour
+  or HUD, and never to Samus' face or her body out of the suit; needs MSAA off; *Reset SSAO* restores the tuned defaults), extra bloom/glow, CAS sharpening, FXAA, and colour
   grading (brightness, contrast, saturation, gamma, temperature, vignette), which are off by default. The game's own
   bloom and lighting are untouched.
 - **ReShade** (bundled in the `reshade` folder, BSD licence): tick *Load ReShade at startup* in F1 > Effects and restart.
