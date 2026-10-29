@@ -10,8 +10,9 @@ at your monitor's resolution, with per-pixel lighting, enhanced materials, ambie
 and MSAA on top of the original look.
 
 > **Controllers:** for now the port is played with **keyboard and mouse only**. Gamepads (Xbox, PlayStation and
-> similar) are **not supported yet**. Support for a real Wii Remote + Nunchuk over Bluetooth is in the code, but I have
-> not been able to test it myself yet, so treat it as untested; it should come later.
+> similar) are **not supported yet**. A **real Wii Remote is not playable yet either**: the port can read its buttons,
+> motion and the Nunchuk over Bluetooth, but not the IR pointer, and Prime 3 needs the pointer to aim and turn. Proper
+> Wii Remote support (pointer and sensor bar) should come later.
 
 > ## ⚠️ Testing phase: testers wanted
 >
@@ -54,7 +55,7 @@ occlusion on). No texture was replaced or upscaled: the materials are built from
 - **Visuals:** I want to keep improving the game's materials (more surfaces with a proper metal, paint, crystal or
   skin response, walls and world geometry next), always from the original textures, and each improvement can be
   switched off in F1.
-- **Controllers:** gamepad support and a tested Wii Remote path (see above).
+- **Controllers:** gamepad support, and real Wii Remote support with the IR pointer (see above).
 
 ---
 
@@ -194,7 +195,7 @@ visual glitch, say whether any effect or ReShade was active (the F12 report reco
 
 - Experimental texture upscaling (Super-xBR) can paint some polygons magenta; it is off by default.
 - No gamepad support yet: keyboard and mouse only.
-- Bluetooth Wii Remote support exists but is untested.
+- A real Wii Remote cannot aim yet (no IR pointer), so it is not playable; use keyboard and mouse.
 - Stutters the first time new materials appear, and in some heavy scenes (see [Work in progress](#work-in-progress)).
 - Only the USA disc (RM3E01, revision 0) is supported.
 

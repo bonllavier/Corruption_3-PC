@@ -68,6 +68,9 @@ Three options, all on by default, shorten the time between moving the mouse and 
 
 ## Real Wii Remote (Bluetooth)
 
-Set `keyboard_mouse = false` in F1 > Controls (restart), pair the remote in Windows Settings > Bluetooth (press 1+2 or
-SYNC, leave the PIN empty), then check **F10 > Controller settings > Wii Remotes**. This path has had much less
-testing than keyboard and mouse; reports are welcome.
+**Not playable yet.** The port can read a real remote paired over Bluetooth (buttons, motion, Nunchuk stick and
+motion), but not its IR camera, so there is no pointer: you cannot aim or turn, which Prime 3 needs all the time.
+Proper support (IR pointer and sensor bar) is planned; until then, play with keyboard and mouse.
+
+For testing only: set `keyboard_mouse = false` in F1 > Controls (restart), pair the remote in Windows Settings >
+Bluetooth (press 1+2 or SYNC, leave the PIN empty), then check **F10 > Controller settings > Wii Remotes**.
