@@ -5,9 +5,13 @@
 # Corruption_3 PC
 
 A native Windows port of **Metroid Prime 3: Corruption** (Wii, USA), created by **bonllavier**.
-The game's program code runs recompiled on your PC: no emulator, no virtual machine. You play with keyboard and mouse
-(or a real Wii Remote over Bluetooth), at your monitor's resolution, with per-pixel lighting, anisotropic
-filtering and MSAA on top of the original look.
+The game's program code runs recompiled on your PC: no emulator, no virtual machine. You play with keyboard and mouse,
+at your monitor's resolution, with per-pixel lighting, enhanced materials, ambient occlusion, anisotropic filtering
+and MSAA on top of the original look.
+
+> **Controllers:** for now the port is played with **keyboard and mouse only**. Gamepads (Xbox, PlayStation and
+> similar) are **not supported yet**. Support for a real Wii Remote + Nunchuk over Bluetooth is in the code, but I have
+> not been able to test it myself yet, so treat it as untested; it should come later.
 
 > ## ⚠️ Testing phase: testers wanted
 >
@@ -22,6 +26,35 @@ filtering and MSAA on top of the original look.
 > only need the area name. Thank you!
 
 **No game assets are included.** You need your own dump of the disc. See [Legal](#legal).
+
+## Screenshots
+
+Taken in game with **F11** (v0.1.5, 1080p, per-pixel lighting, enhanced metal and enhanced materials, ambient
+occlusion on). No texture was replaced or upscaled: the materials are built from the game's own textures.
+
+| | |
+| --- | --- |
+| ![Bounty hunters briefing on the G.F.S. Olympus](docs/media/screenshots/hunters-briefing.jpg) | ![Gandrayda, Ghor and Rundas](docs/media/screenshots/gandrayda-ghor.jpg) |
+| Briefing on the Olympus: Ghor's machine metal, Rundas' crystal armour, Gandrayda's softer skin sheen and Samus' suit | Gandrayda and Ghor close up |
+| ![Admiral Dane and the bounty hunters](docs/media/screenshots/hunters-dane.jpg) | ![Admiral Dane with the Federation fleet behind him](docs/media/screenshots/dane-fleet.jpg) |
+| The hunters and Admiral Dane (his skin is kept out of the metal material) | Dane with the Federation fleet: brushed-metal hulls |
+| ![The Olympus bridge during the attack](docs/media/screenshots/olympus-bridge.jpg) | ![Samus at a save station](docs/media/screenshots/samus-save-station.jpg) |
+| The Olympus bridge during the pirate attack, through Samus' visor | Samus at a save station |
+| ![Samus in the Varia suit](docs/media/screenshots/samus-varia.jpg) | ![Samus in the PED suit on Bryyo](docs/media/screenshots/samus-ped-bryyo.jpg) |
+| The suit with the enhanced metal material | PED suit on Bryyo |
+| ![Samus' gunship on Bryyo](docs/media/screenshots/gunship-bryyo.jpg) | |
+| Samus' gunship on Bryyo; the prompt shows your key instead of the Wii button | |
+
+## Work in progress
+
+- **Performance:** most of the game runs at 60 FPS, but there are still **stutters**: the first time a new material
+  appears its shader has to be compiled, and some heavy scenes (many enemies or effects at once, areas loading in)
+  take the game logic longer than a frame. I keep working on both, release after release; the goal is a steady 60 FPS
+  everywhere. The game logic always runs at 60 Hz like the console, it is never sped up or slowed down.
+- **Visuals:** I want to keep improving the game's materials (more surfaces with a proper metal, paint, crystal or
+  skin response, walls and world geometry next), always from the original textures, and each improvement can be
+  switched off in F1.
+- **Controllers:** gamepad support and a tested Wii Remote path (see above).
 
 ---
 
@@ -82,7 +115,7 @@ Full table and gesture notes: [docs/controls.md](docs/controls.md).
 | F1 | Port options: video, controls, audio, performance, diagnostics |
 | F10 | Renderer bar (resolution, display mode, Wii Remote pairing, audio) |
 | F12 | **Create a bug report** (screenshot + log + settings, zipped; the file name carries the version) |
-| F11 | **Screenshot**: the game picture with the image effects, without the port's menus, saved as JPEG in `UserData/Screenshots` (`Corruption3PC_v<version>_<build>_<date>_<time>.jpg`) |
+| F11 | **Screenshot**: the game picture with the image effects, saved as JPEG in `UserData/Screenshots` (`Corruption3PC_v<version>_<build>_<date>_<time>.jpg`). For now the FPS counter and the port's notices can end up in the picture; untick F1 > Video > *Show FPS* for a clean shot |
 | F9 | Performance panel |
 | F6 | Virtual Wii Remote motion panel |
 | Esc | Exit prompt |
@@ -160,7 +193,9 @@ visual glitch, say whether any effect or ReShade was active (the F12 report reco
 ## Known issues
 
 - Experimental texture upscaling (Super-xBR) can paint some polygons magenta; it is off by default.
-- Bluetooth Wii Remote support exists but has had far less testing than keyboard and mouse.
+- No gamepad support yet: keyboard and mouse only.
+- Bluetooth Wii Remote support exists but is untested.
+- Stutters the first time new materials appear, and in some heavy scenes (see [Work in progress](#work-in-progress)).
 - Only the USA disc (RM3E01, revision 0) is supported.
 
 ## Legal
