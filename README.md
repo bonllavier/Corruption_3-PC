@@ -109,6 +109,27 @@ The port drives a virtual Wii Remote and Nunchuk. Every key can be remapped in *
 
 Full table and gesture notes: [docs/controls.md](docs/controls.md).
 
+### Aiming with the mouse: as little latency as possible
+
+On the Wii the game smooths the pointer and the camera to hide the shake of a hand-held remote. A mouse has no shake,
+so on PC those stages only add delay between moving the mouse and Samus aiming or firing. The port removes them (all
+on by default, each can be switched off in F1):
+
+- **No pointer smoothing**: the game filters the pointer adaptively; on slow, precise movements that filter added
+  dozens of frames of lag, and about three frames on fast ones. The port hands the game the raw mouse position.
+- **Mouse look without inertia**: in first person the camera follows the mouse directly. The game's vertical easing
+  and its limit on how fast the view can tilt up or down are bypassed while you aim with the mouse (horizontal turning
+  had no inertia to begin with). Optional smoothing exists in F1 > Controls and is off by default.
+- **Mouse read at the last moment**: the position is read exactly when the game reads its controller, not from an
+  event that may be one frame old.
+- **One image in the presentation queue** instead of up to three: the picture you see is the newest one rendered.
+  **Borderless fullscreen** also skips the Windows compositor.
+
+Measured in game, from a mouse movement to the frame that shows it: **about 39 ms before, about 31-32 ms now**. That
+figure does not include the removed pointer smoothing or the images that used to wait in the presentation queue, so
+the real difference you feel is larger. The rest is the game itself: it reads the controller at the start of a frame
+and shows the result about one frame later, exactly like the console, at 60 Hz.
+
 ### Hotkeys
 
 | Key | Action |
