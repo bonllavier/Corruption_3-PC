@@ -28,6 +28,13 @@ and MSAA on top of the original look.
 
 **No game assets are included.** You need your own dump of the disc. See [Legal](#legal).
 
+## Gameplay video
+
+[![Metroid Prime 3 PC port - static recompilation - beta 0.1.5 (YouTube)](https://img.youtube.com/vi/s8OuQFOtdWc/maxresdefault.jpg)](https://www.youtube.com/watch?v=s8OuQFOtdWc)
+
+*Metroid Prime 3 PC port - static recompilation - beta 0.1.5*: gameplay with keyboard and mouse. Click the image to
+watch it on YouTube.
+
 ## Screenshots
 
 Taken in game with **F11** (v0.1.5, 1080p, per-pixel lighting, enhanced metal and enhanced materials, ambient
