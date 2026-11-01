@@ -4,6 +4,72 @@ Versions follow `MAJOR.MINOR.PATCH`. Each release on GitHub is tagged `vMAJOR.MI
 `Corruption_3-PC-vMAJOR.MINOR.PATCH-win64.zip` with its SHA-256. The version is also shown at the bottom of the
 F1 panel and in the executable's file properties.
 
+## v0.1.6 - 2026-11-01 - World lighting, wall reflections, gamepad, FOV, achievements and smoother fights
+
+### First launch: shaders compile in the background
+- The first launch of a new install compiles the game's shaders in the background. Measured on a 4-core i7-4790:
+  **about 17 minutes, with memory use temporarily reaching about 9 GB** (of 16 GB installed).
+- That memory stays in use until you close the game, so restart it once the compilation has finished. Later launches
+  reuse the compiled shaders and get ready in **about 7 seconds**.
+- With less than 16 GB of RAM, keep the Windows page file enabled for that first run.
+- Updating from an earlier version only recompiles the shaders that changed.
+
+### World lighting (F1 > Effects, experimental, each option on its own)
+- **New: environment material and borrowed lights.** Walls and floors with baked light react to the view and get
+  highlights from the room's character lights.
+- **New: floor reflections (SSR)** on smooth floors, on by default at strength 0.70. They only reflect what is on
+  screen.
+- **New: wall reflections** on very smooth walls such as polished panels, in their own section so you can turn them off
+  without affecting anything else. On by default at strength 0.80. They only reflect what is on screen, and Samus
+  herself is never reflected. Performance cost: low to medium.
+- **New:** material in rooms with live lights, smooth lightmaps, soft highlights, soft character shadows and
+  reflections that respect occlusion. All of these are on by default.
+- **New, off by default:** light shafts (medium GPU cost), area-coloured reflections and linear light blending.
+- **Fixed: duplicated glow.** Thin lights and the gunship's engine flames showed separate copies of their glow at high
+  resolutions. Option *"Fix glow ghost copies"*, on by default.
+
+### Materials
+- New F1 > Materials tab, with materials for Samus out of the suit, the gunship and Gandrayda's frost.
+
+### Controls and options
+- **New: gamepad support** through SDL3.
+- **New: first-person field of view option.** It cannot be used while RetroAchievements is on.
+- **New: RetroAchievements** (casual mode), in the F2 window.
+- **New: photo mode.** F3 freezes the game; the right arrow advances one frame.
+- **New: two start-up screens** in place of the Wii Remote strap screen, showing what this PC version adds.
+
+### Performance and fixes
+- Fewer frame drops in effect-heavy moments such as the PED suit's Phazon and the fight with Rundas. Ambient occlusion
+  and reflections now run once per game frame, and fewer shaders compile at once during play.
+- **SSAO quality now defaults to 8 samples** (it was 12), which costs less GPU time.
+- Fixed: the SSAO quality setting went back to its default after being changed.
+- Fixed: choosing to exit to the title screen could leave a black screen.
+- New option *"Expand draws on the decoder thread"* (F1 > Performance), **off by default**. Turning it on breaks the
+  lava surface in Bryyo (seams between its patches when ripples appear), so leave it off.
+- More shaders are compiled ahead of time for new installs.
+- Removed the F9 performance panel and other developer diagnostics from the public build. F12 bug reports, the FPS
+  counter and the F6 motion panel stay.
+
+### About the VirusTotal result
+1 of the 70 engines that analysed the executable flags it: Trapmine, with the label `malicious.moderate.ml.score`. The
+other 69, including Kaspersky, Bitdefender, Malwarebytes, Microsoft and ESET, report nothing. I consider it a false
+positive, although a scan alone cannot prove that:
+
+- It is a machine-learning score, not a malware signature: the label names no malware family and no behaviour.
+- Trapmine has flagged this port before: versions before v0.1.5 got this same label and v0.1.5 got `suspicious.low`, so
+  the score went back up in this release. In [this r/antivirus thread](https://www.reddit.com/r/antivirus/comments/15zfn7x/maliciousmoderatemlscore/)
+  about the same label, a game developer reports that Trapmine flags their two games as well. That is a personal
+  experience, not an official verdict.
+- The executable is about 157 MB, unsigned, new to VirusTotal and mostly machine-translated code, which may be what the model
+  distrusts. This is my best guess, not a confirmed cause.
+
+You never need to turn off your antivirus for this project. The reasons, what the port does and how to check the download
+yourself are in the README, under [Antivirus warnings](https://github.com/bonllavier/Corruption_3-PC#antivirus-warnings).
+
+### Updating
+Unzipping over an existing folder keeps your `UserData/Config.toml`, so any option you have already saved keeps your
+value. If you installed v0.1.5, your SSAO quality stays at 12 samples until you change it in F1 > Effects.
+
 ## v0.1.5 - 2026-10-28 - Samus' face and skin, enhanced materials, F11 screenshots
 
 This version also contains everything from 0.1.4, which was withdrawn.
