@@ -19,9 +19,11 @@ What the zip contains, and nothing else:
 | `crash_*.txt` | Only if the game crashed earlier in that session: registers and stack |
 | `Config.toml` | Your settings and key bindings |
 | `system.txt` | Port version and build, Windows build, CPU, RAM, GPU, display, settings in use |
+| `save/` | Your Metroid Prime 3 save (`save.bin`, `banner.bin`), so the developer can load the spot you report |
 | `HOW_TO_REPORT.txt` | These instructions |
 
-No save games, no game data, no personal files. Open the files before sending if you want to check.
+No game assets and no personal files. Open the files before sending if you want to check, and remove `save/` if you
+prefer not to share your save.
 
 ### If the game closes with an error dialog
 

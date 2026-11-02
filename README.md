@@ -23,9 +23,12 @@ wall reflections, anisotropic filtering and MSAA on top of the original look.
 > gestures. I need people to play it and tell me where it breaks.
 >
 > **How to help:** play, and when something goes wrong press **F12** in game. The port writes a small zip with a
-> screenshot, the session log and your settings. Post it in **[Discussions](../../discussions)** (category *Bug reports*)
+> screenshot, the session log, your settings and your save. Post it in **[Discussions](../../discussions)** (category *Bug reports*)
 > together with **where you were in the game**. That one detail lets me go there and reproduce it. Performance problems
 > only need the area name. Thank you!
+
+> **🏆 RetroAchievements built in:** earn this game's achievements directly in the port, with no emulator or extra
+> tool. They are recorded on your RetroAchievements account. See [RetroAchievements](#retroachievements).
 
 **No game assets are included.** You need your own dump of the disc. See [Legal](#legal).
 
@@ -54,8 +57,10 @@ occlusion on). No texture was replaced or upscaled: the materials are built from
 | The Olympus bridge during the pirate attack, through Samus' visor | Samus at a save station |
 | ![Samus in the Varia suit](docs/media/screenshots/samus-varia.jpg) | ![Samus in the PED suit on Bryyo](docs/media/screenshots/samus-ped-bryyo.jpg) |
 | The suit with the enhanced metal material | PED suit on Bryyo |
-| ![Samus' gunship on Bryyo](docs/media/screenshots/gunship-bryyo.jpg) | |
-| Samus' gunship on Bryyo; the prompt shows your key instead of the Wii button | |
+| ![Samus' gunship on Bryyo](docs/media/screenshots/gunship-bryyo.jpg) | ![Gandrayda with her improved material](docs/media/screenshots/gandrayda-material.jpg) |
+| Samus' gunship on Bryyo; the prompt shows your key instead of the Wii button | Gandrayda with her slightly improved material |
+| ![Samus close up with ambient occlusion](docs/media/screenshots/samus-ssao.jpg) | ![First-person view of a corridor with ambient occlusion](docs/media/screenshots/corridor-ssao.jpg) |
+| Samus close up, with subtle ambient occlusion (SSAO), which I keep improving and optimizing | The same SSAO in a first-person view of a corridor |
 
 ## Work in progress
 
@@ -147,6 +152,16 @@ be remapped in **F1 > Controls**, and the game's prompts show your gamepad's but
 | Right stick click | Shake |
 | RB / R1 (hold) | Motion mode: the right stick twists, pushes and pulls the remote (levers, valves, ship controls) |
 
+**One button for the Wii Remote's motion events.** A gamepad has no motion gestures to perform, so **RB / R1** stands in
+for them. Hold it and the right stick twists, pushes and pulls the remote. The other movements are in the *With RB held*
+column of **F1 > Controls**: RB + Y pulls the lasso, RB + D-pad up or down tilts the remote, RB + D-pad left or right
+twists the Nunchuk, and RB + X or B tilts the Nunchuk. Everything else keeps working while you hold it, so you can still
+move, fire and jump.
+
+<p align="center">
+  <img src="docs/media/screenshots/gamepad-controls.jpg" alt="Gamepad options in F1 > Controls, with the With RB held column" width="420">
+</p>
+
 ### Aiming with the mouse: as little latency as possible
 
 On the Wii the game smooths the pointer and the camera to hide the shake of a hand-held remote. A mouse has no shake,
@@ -181,6 +196,37 @@ and shows the result about one frame later, exactly like the console, at 60 Hz.
 | F6 | Virtual Wii Remote motion panel |
 | Esc | Exit prompt |
 
+## RetroAchievements
+
+**Earn real [RetroAchievements](https://retroachievements.org) directly in the port, with no emulator or extra tool.**
+The port runs the Wii game's own code on the same memory layout, so it can read the conditions written for this game.
+Achievements are detected while you play and recorded on your account. Press **F2** to open its window.
+
+![The RetroAchievements window over the game, with the list of unlocked achievements](docs/media/screenshots/retroachievements-window.jpg)
+
+- **The game's set:** 99 achievements worth 830 points at the time of writing, each with its badge, description, and
+  unlock date or progress bar.
+- **Your account in the game:** log in or create an account, see your avatar and points, and open your profile or the
+  game's page. Your session is remembered between launches.
+- **Your progress at a glance:** achievements and points earned, a completion bar, and a live line with where you are in
+  the game.
+- **Pop-ups in the style of Samus' visor:** each unlock slides in with its badge, title, description and points. You can
+  turn them off.
+- **Indicators while you play:** progress towards an achievement, and active challenges as badges with a pulsing frame.
+- **Connection notices:** the port tells you if the connection to the server is lost or comes back.
+- **Your credentials stay protected:** the password is never stored. The session token is encrypted by Windows for your
+  user and is never included in F12 bug reports.
+- **Built to leave the game running smoothly:** network requests, the disc check and badge downloads run on separate
+  threads.
+
+**Current limits:**
+
+- Unlocks count as **casual (softcore)**; hardcore is not offered.
+- Leaderboards are not supported yet.
+- While RetroAchievements is on, the custom field of view is turned off so the game plays as shipped.
+- So far I have unlocked 8 of the 99, at the start of the game. If a later achievement does not trigger, please report it
+  in [Discussions](../../discussions) and say where you were.
+
 ## Version and updates
 
 **F1 > Info** shows the exact build you are running (version, build date), the paths in use and whether a newer
@@ -192,7 +238,7 @@ in its file name (`report_<date>_v0.1.0.zip`) and in `system.txt`, so please alw
 ## Reporting bugs
 
 Press **F12** when something looks wrong. The port writes `UserData/Reports/report_<date>.zip` with a screenshot, the
-console log of that session, your settings and a system summary, then opens the folder for you. Post the zip in
+console log of that session, your settings, your save and a system summary, then opens the folder for you. Post the zip in
 [Discussions](../../discussions) (*Bug reports*) and say **where in the game you were** (planet, room, what you were doing).
 
 If the game closes with an error dialog, the dialog names the `UserData/Logs/...` folder of that run. Zip that folder and attach it.
