@@ -34,8 +34,7 @@ Logs older than four days are deleted automatically.
 ### Performance problems (stutter, low FPS)
 
 Create a report with **F12** and mention the area. Performance issues
-are reproduced from the area name alone, so no further files are needed. Note that the first visit to an area compiles
-new shaders: a short hitch there is expected.
+are reproduced from the area name alone, so no further files are needed.
 
 ## Common issues
 

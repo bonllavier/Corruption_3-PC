@@ -64,10 +64,10 @@ occlusion on). No texture was replaced or upscaled: the materials are built from
 
 ## Work in progress
 
-- **Performance:** most of the game runs at 60 FPS, but there are still **stutters**: the first time a new material
-  appears its shader has to be compiled, and some heavy scenes (many enemies or effects at once, areas loading in)
-  take the game logic longer than a frame. I keep working on both, release after release; the goal is a steady 60 FPS
-  everywhere. The game logic always runs at 60 Hz like the console, it is never sped up or slowed down.
+- **Performance:** with the ubershader, new materials no longer cause stutter, and on a newer PC the port held a stable
+  60 FPS with no stutter. My own PC is older (4-core i7-4790 with DDR3), and there the heaviest scenes (many enemies or
+  effects at once, areas loading in) can still take the game logic longer than a frame. I keep optimizing them, release
+  after release. The game logic always runs at 60 Hz like the console, it is never sped up or slowed down.
 - **Visuals:** I want to keep improving the game's materials (more surfaces with a proper metal, paint, crystal or
   skin response) and the new World lighting for walls and floors, always from the original textures, and each
   improvement can be switched off in F1.
@@ -252,23 +252,20 @@ Nothing personal is collected: you can open every file in the zip before posting
 - **Performance**: GPU thread, disc reads on their own thread, texture decoding on several cores, shader waiting policy, and the experimental *ubershader* (see below). The game logic always runs at 60 Hz, like the console.
 - **Effects** and **Materials**: see [Image effects](#image-effects-f1--effects). Materials has the options for Samus out of the suit, the gunship and Gandrayda's frost.
 
-## Please read: shaders, stutter and the cache
+## Please read: shaders and the cache
 
 The Wii draws with a fixed-function GPU whose state (texture stages, blending, lighting, fog...) the game changes
 thousands of times per frame. On a PC each distinct combination has to become a real shader program, compiled by your
 graphics driver for *your* GPU. The port cannot know every combination in advance, so:
 
-- **The first time a material appears on your PC, its shader is compiled.** That is the hitch you feel when you enter
-  a new room, meet a new enemy or fire a new weapon for the first time. The port ships a seed of every combination seen
-  so far (thousands of them) and compiles it in the background at startup, which is why the first launch takes minutes
-  and temporarily uses a lot of memory (see [Getting started](#getting-started)); areas nobody has played yet still
-  compile on sight.
+- **The first time a material appears on your PC, its shader is compiled in the background**, for example when you enter
+  a new room, meet a new enemy or fire a new weapon for the first time. Until it is ready the ubershader draws that
+  material, so the game keeps running (see below). The port ships a seed of every combination seen so far (thousands of
+  them) and compiles it in the background at startup, which is why the first launch takes minutes and temporarily uses
+  a lot of memory (see [Getting started](#getting-started)); areas nobody has played yet still compile on sight.
 - **Compiled shaders are kept in `UserData/Cache`.** The next visit to the same place, and the next launch, do not
-  compile again: once the cache has filled for an area, the stutter there is gone. Do not delete that folder unless
-  troubleshooting.
-- **What to report:** a hitch the *first* time you see something is expected and not worth a report. A stutter that
-  keeps happening in the same place on later visits, or constantly low FPS, is a real problem: post it with the area
-  name.
+  compile again. Do not delete that folder unless troubleshooting.
+- **What to report:** if you see stutter or constantly low FPS, post it with the area name and your CPU and GPU.
 - **How you can make it better for everyone:** after playing new areas, your `UserData/Cache/pipeline_cache.db`
   contains the recipes (not shaders, not game data, a few MB) of everything you rendered. Attaching it to a Discussions
   post lets the next release ship them pre-seeded, so other players never compile them.
@@ -338,7 +335,6 @@ post the name in [Discussions](../../discussions).
 - *F1 > Performance > "Expand draws on the decoder thread"* is off by default. Turning it on breaks the lava surface in
   Bryyo (seams between its patches when ripples appear), so leave it off.
 - A real Wii Remote cannot aim yet (no IR pointer), so it is not playable; use keyboard and mouse or a gamepad.
-- Stutters the first time new materials appear, and in some heavy scenes (see [Work in progress](#work-in-progress)).
 - Only the USA disc (RM3E01, revision 0) is supported.
 
 ## Legal
