@@ -2,7 +2,7 @@
   <img src="docs/media/banner.png" alt="Corruption_3 PC" width="100%">
 </p>
 
-# Corruption_3 PC
+# Corruption_3 PC — Metroid Prime 3: Corruption static recompilation (recomp) for Windows
 
 A native Windows port of **Metroid Prime 3: Corruption** (Wii, USA), created by **bonllavier**.
 The game's program code runs recompiled on your PC: no emulator, no virtual machine. You play with keyboard and mouse
