@@ -307,8 +307,8 @@ Nothing personal is collected: you can open every file in the zip before posting
 
 ## Options worth knowing (F1)
 
-- **Video**: aspect ratio (16:9, 4:3, or ultrawide: match the monitor, 21:9 or 32:9, which widens the view to the sides and keeps the HUD in the 16:9 area; pre-rendered videos stay 16:9), internal resolution (monitor native by default), MSAA 2x/4x/8x, anisotropic filtering, first-person field of view (not available while RetroAchievements is on), per-pixel lighting, enhanced metal (modern metal material on the suit, armour and machinery; skin is left alone; on by default), enhanced materials (the same treatment for identified surfaces such as the starship hulls; on by default), console copy filter (the Wii's vertical blur, off by default), native 120 FPS and frame interpolation to 120/180 Hz (both experimental and off by default, see [High frame rates](#high-frame-rates-native-120-fps-and-interpolated-both-experimental)), custom textures and texture dumping (see [Custom textures](#custom-textures-and-hd-texture-packs)).
-- **Controls**: key and gamepad bindings, mouse look sensitivity and smoothing, keyboard icons in game prompts, hide cursor, always-full Wii Remote battery.
+- **Video**: aspect ratio (16:9, 4:3, or ultrawide: match the monitor, 21:9 or 32:9, which widens the view to the sides and keeps the HUD in the 16:9 area; pre-rendered videos stay 16:9), internal resolution (monitor native by default), MSAA 2x/4x/8x, anisotropic filtering, first-person field of view (not available while RetroAchievements is on), per-pixel lighting, enhanced metal (modern metal material on the suit, armour and machinery; skin is left alone; on by default), enhanced materials (the same treatment for identified surfaces such as the starship hulls; on by default), console copy filter (the Wii's vertical blur, off by default), native 120 FPS and frame interpolation to 120/180 Hz (both experimental and off by default, see [High frame rates](#high-frame-rates-native-120-fps-and-interpolated-both-experimental)), custom textures and texture dumping (see [Custom textures](#custom-textures-and-hd-texture-packs)), panel size (makes the F1, F2 and other port panels larger, up to 400 %; *Automatic* follows the window height, 200 % at 4K).
+- **Controls**: key and gamepad bindings, mouse look sensitivity and smoothing (since v0.1.8 mouse look turns up and down ±80 degrees, as far as the Wii Remote reaches), keyboard icons in game prompts, hide cursor, always-full Wii Remote battery.
 - **Audio**: volume, stereo / Pro Logic II / mono, high-quality resampler.
 - **Language**: the game's text in English, Spanish, French, German or Italian, from the USA disc (restart to apply).
   See [Game language](#game-language-english-spanish-french-german-or-italian).
@@ -401,7 +401,9 @@ and check the FPS counter (F1 > Video > Show FPS) after each step. Everything ap
 
 With all of the above off you get the original look of the game at your monitor's resolution, which needs far less
 from the GPU. If the FPS still drop with everything off, the limit is usually the CPU (the game's own logic): press
-F12 there and post the report, saying where you were.
+F12 there and post the report, saying where you were. v0.1.8 cut the game thread's work by about 8 % with the
+original Metroid Prime 3: Corruption disc (see the [changelog](CHANGELOG.md); the Trilogy add-on gets it in v0.1.9),
+so update first if you are on an older version.
 
 ## Please read: shaders and the cache
 
@@ -484,6 +486,9 @@ Full guide: supported formats, mipmaps, dumping, load times and problems in
 
 Every release is scanned with VirusTotal, and the public reports are linked in its release notes. Windows SmartScreen
 may also warn you, because the executable is not signed and each release is a new file.
+
+**v0.1.8:** no engine flags anything. That covers the four downloads (57 to 66 engines each), the three Windows
+executables (66 or 67 engines each, Trapmine included) and the three Linux executables (63 engines each).
 
 **v0.1.7:** none of the 61 to 66 engines flags any of the four downloads (both Windows zips and both Linux archives),
 and none of the 54 that analysed the Linux executable flags it. On Windows, 1 of the 69 or 70 engines that analysed

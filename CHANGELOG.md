@@ -5,6 +5,106 @@ Versions follow `MAJOR.MINOR.PATCH`. Each release on GitHub is tagged `vMAJOR.MI
 (`-linux-x86_64.tar.gz`) and, for each platform, the optional Metroid Prime Trilogy add-on of the same version. The version is also shown at the bottom of the
 F1 panel and in the executable's file properties.
 
+## v0.1.8 - 2026-11-27 - Lighter on the CPU, smoother heavy scenes, bigger panels and full mouse-look range
+
+### Downloads
+
+| | Main archive: Metroid Prime 3: Corruption (USA) | Optional add-on: Metroid Prime Trilogy (USA) |
+|---|---|---|
+| Windows | `Corruption_3-PC-v0.1.8-win64.zip` | `Corruption_3-PC-v0.1.8-Trilogy-addon-win64.zip` |
+| Linux x86_64 | `Corruption_3-PC-v0.1.8-linux-x86_64.tar.gz` | `Corruption_3-PC-v0.1.8-Trilogy-addon-linux-x86_64.tar.gz` |
+
+Update both archives together if you use the add-on: the main archive and the add-on must be of the same version.
+
+### Highlights
+
+- **CPU improvements** in the recompiled game code and in how graphics commands reach the GPU thread. In the
+  measured scene the game thread spends about 8 % less time working. The worst cutscene we measured runs at 55-58 FPS
+  at its heaviest moment instead of about 50 (details below). **The improvements to the recompiled code apply only
+  to the original Metroid Prime 3: Corruption disc (RM3E01) in this version; the Trilogy add-on gets them in v0.1.9.**
+- **The cutscene before the Rundas fight no longer collapses to about 10 FPS** with SSAO on.
+- **Panel size option** for the F1, F2 and other port panels, up to 400 % for 4K screens and TVs.
+- **Mouse look reaches up and down as far as the Wii Remote** (±80 degrees instead of -30/+40).
+- Windows and Linux, main archive and Trilogy add-on, all at the same version.
+
+### Performance: CPU (the most important change in this version)
+
+The game's logic runs on one thread. On many PCs that thread, not the GPU, is what limits the frame rate in the
+heaviest scenes. This version reduces its work in four ways. All four are on in both the Windows and the Linux builds
+of `Corruption_3 PC`, which plays the original **Metroid Prime 3: Corruption** disc (USA, RM3E01).
+
+> **Only the original Metroid Prime 3: Corruption disc gets improvements 1-3 in v0.1.8.** Metroid Prime 3 played
+> from the **Metroid Prime Trilogy** disc (the add-on) only has improvement 4. Its code is translated separately and
+> needs its own verification. The other three are planned for the add-on in **v0.1.9**.
+
+1. **Fewer register saves around calls.** The PowerPC code is translated to C++ that keeps the console's registers
+   in a structure in memory. Before, every call between translated functions wrote those registers back to that
+   structure first. Now the translator proves which of those writes nobody reads, and drops them: 770,806 of 1,458,556
+   are gone (53 %).
+2. **Fewer register reloads after calls.** The PowerPC rules say a called function must preserve some registers (r1,
+   r2, r13-r31). The translator now relies on that where it can prove it, instead of reading them back after every
+   call: 377,392 of 384,688 reloads are gone. A special verification build compared every skipped reload with the real
+   value during a full play session (including the Rundas cutscene) and a recorded hangar tour: no differences.
+3. **Fewer memory checks.** Every memory access used to check whether it pointed to the Wii's hardware registers
+   instead of RAM. Where the translator can prove the address is ordinary RAM, the check is gone (about 30 % of the
+   checked accesses, in 21,712 functions).
+4. **Graphics commands in batches.** The game sends its drawing commands in 32-byte blocks, about 650,000 per second
+   in heavy scenes. They are now handed to the GPU thread 16 at a time, and the translated code appends them directly
+   instead of calling a helper for each word.
+
+Measured results (all with the original Metroid Prime 3: Corruption disc):
+- **Game thread:** about 8.4 % less busy time in a recorded tour of the starting hangar (31.5 % → 28.8 %), and 9.5 %
+  less time in the game's own code (two runs of each, matching within 0.1 points). The hangar already ran at 60 FPS,
+  so the gain there is headroom: a little less CPU work for the same frames.
+- **Cutscene before the Rundas fight** (the heaviest scene measured, limited by the CPU after the fix below): its
+  worst moments went from about 50 FPS to 55-58 FPS (Linux, i7-4790 and RTX 3050), with roughly 35 dropped frames
+  instead of about 80.
+- **Smaller executable:** `Corruption_3 PC.exe` went from 165 MB to 149 MB.
+- The recorded hangar tour keeps 60 FPS on Windows and Linux with these changes. *Native 120 FPS*, which runs the
+  game's logic twice per console frame, benefits from the same savings.
+
+**Trilogy add-on:** it has the graphics command batches (4), but not the improvements to the recompiled code
+(1-3). Those passes have only been validated on the original Corruption disc so far, and they will reach the
+add-on in v0.1.9, after their own verification on the Trilogy disc. The figures above do not apply to it yet.
+
+### Performance: GPU
+
+- **Cutscene before the Rundas fight with SSAO on:** the ambient occlusion pass ran dozens of full-screen passes per
+  frame under the cutscene's effects, and the GPU went to 100 %. With an RTX 3050 the game dropped to 9-11 FPS for
+  about 30 seconds. They are now joined into at most 8 passes; the same scene measured 50 FPS before the CPU
+  improvements above and runs at 55-58 FPS with them.
+
+### Controls
+
+- **Mouse look reaches as high and as low as the Wii Remote.** It was limited to -30/+40 degrees; it now covers
+  ±80 degrees. With mouse look the reticle stays centred instead of moving to the screen edge as it does with the Wii
+  Remote, so the camera itself has to turn further to see the same things.
+
+### Options
+
+- **Panel size** (F1 > Video): makes the F1, F2 and other port panels larger, from 100 % to 400 %. *Automatic* (the
+  default) follows the window height: 100 % up to 1080 lines, 200 % at 2160 (4K). The windows, text fields, the
+  achievement badges and the controller setup grow with it, and the panel is centred again and kept on screen when the
+  size changes.
+
+### Text and languages
+
+- **Pump lever (Metroid3.pak, both discs):**
+  - With keyboard/mouse or a gamepad, its two hints now name the key or button to hold. One is for aiming at the
+    screen and pulling the handle back, the other for pumping.
+  - In Spanish with a real Wii Remote, the text says what to do again: "pull back, then push forward", as in English.
+    It had become "push back and forth".
+- 1,116 translated strings are corrected on the fly in German, French, Spanish and Italian (one more than in v0.1.7).
+
+### Trilogy add-on
+
+- On Linux, the mouse-look hint uses the game's HUD font, as on Windows. The v0.1.7 Linux add-on used the default font.
+
+### Shaders
+
+- The shader seed shipped with the game grew from 41.6 MB to 48.6 MB with the combinations recorded since v0.1.7. More
+  places are compiled in the background at startup and fewer compile when you first see them.
+
 ## v0.1.7 - 2026-11-17 - Linux version, Metroid Prime Trilogy (USA), native 120 FPS and ultrawide (experimental)
 
 This is the biggest update so far. The two headline additions are a **native Linux version** and support for the
